@@ -1,6 +1,6 @@
 {
   "name": "zapp-pipes-provider-dotstudiopro",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "description": "Zapp Provider for Applicaster platform by dotstudioPRO",
   "main": "lib/index.js",
   "scripts": {
