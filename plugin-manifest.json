@@ -3,7 +3,7 @@
   "platform": null,
   "author_name": "dotstudiopro",
   "author_email": "matt@dotstudioz.com",
-  "manifest_version": "0.23.0",
+  "manifest_version": "0.24.0",
   "name": "dotstudioPRO Applicaster Provider",
   "dependency_name": "zapp-pipes-provider-dotstudiopro",
   "dependency_version": "0.23.0",

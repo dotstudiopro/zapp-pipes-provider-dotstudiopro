@@ -16,7 +16,7 @@ export const handler = nativeBridge => params => {
 
       // console.log("parsedPluginConfiguration", parsedPluginConfiguration);
       const api_key = getApiKey(parsedPluginConfiguration);
-      console.log("api_key", api_key);
+      // console.log("api_key", api_key);
 
       return authenticate(nativeBridge, api_key)
         .then(authObj => {
@@ -32,10 +32,10 @@ export const handler = nativeBridge => params => {
           params.deviceHeight = appData.deviceHeight;
           params.platform = appData.platform;
           params.deviceType = appData.deviceType;
-          params.android_ad_tag = appData.android_ad_tag;
-          params.ios_ad_tag = appData.ios_ad_tag;
+          params.android_ad_tag = nativeBridge.getLocalStoreItem('android_ad_tag');
+          params.ios_ad_tag = nativeBridge.getLocalStoreItem('ios_ad_tag');
 
-          console.log("Production build params:", params);
+          // console.log("Production build params:", params);
 
           return commands[type](params)
             .then(nativeBridge.sendResponse)
