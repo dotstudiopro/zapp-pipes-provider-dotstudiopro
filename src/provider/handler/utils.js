@@ -41,7 +41,7 @@ var authenticate = function(nativeBridge, api_key) {
       nativeBridge.getLocalStoreItem("cdn", "dotstudiopro")
     );
 
-    console.log("auth promise resolves", { token, expires, cdn });
+    // console.log("auth promise resolves", { token, expires, cdn });
 
     // if we have a token check to make sure it's not expired first
     if (token && token.length && expires && expires.length) {
