@@ -32,8 +32,8 @@ export const handler = nativeBridge => params => {
           params.deviceHeight = appData.deviceHeight;
           params.platform = appData.platform;
           params.deviceType = appData.deviceType;
-          params.android_ad_tag = nativeBridge.getLocalStoreItem('android_ad_tag');
-          params.ios_ad_tag = nativeBridge.getLocalStoreItem('ios_ad_tag');
+          params.android_ad_tag = nativeBridge.getLocalStoreItem('android_ad_tag', 'dotstudiopro');
+          params.ios_ad_tag = nativeBridge.getLocalStoreItem('ios_ad_tag', 'dotstudiopro');
 
           // console.log("Production build params:", params);
 
