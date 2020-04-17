@@ -164,9 +164,9 @@ function parseVideo(video, params) {
       type: "video/hls",
       src: url
     },
-    extensions: {
-      video_ads: video_ads
-    }
+    // extensions: {
+    //   video_ads: video_ads
+    // }
   };
 
 }
