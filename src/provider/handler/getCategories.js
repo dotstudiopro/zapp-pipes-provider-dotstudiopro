@@ -65,7 +65,8 @@ function parseCategory(category) {
   const {
     _id,
     name,
-    slug
+    slug,
+    display_name
   } = category;
 
   const returnObj = {
@@ -73,7 +74,7 @@ function parseCategory(category) {
       value: 'feed'
     },
     id: _id,
-    title: name,
+    title: display_name ? display_name :name,
     media_group: [],
     extensions: {},
     content: {
