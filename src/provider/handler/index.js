@@ -64,8 +64,8 @@ export const handler = nativeBridge => params => {
         params.deviceHeight = "1080";
         params.platform = "android";
         params.deviceType = "phone";
-        params.android_ad_tag = "https://ads.superawesome.tv/v2/ad/43536?vast=true";
-        params.ios_ad_tag = "https://ads.superawesome.tv/v2/ad/43537?vast=true";
+        params.android_ad_tag = "https://ads.superawesome.tv/v2/ad/44341?vast=true";
+        params.ios_ad_tag = "https://ads.superawesome.tv/v2/ad/44340?vast=true";
 
         return commands[type](params)
           .then(nativeBridge.sendResponse)
