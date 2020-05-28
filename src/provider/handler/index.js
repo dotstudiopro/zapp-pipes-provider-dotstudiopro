@@ -27,11 +27,15 @@ export const handler = nativeBridge => params => {
             params.cdn = "https://" + params.cdn;
           }
 
-          const appData = nativeBridge.appData();
-          params.deviceWidth = appData.deviceWidth;
-          params.deviceHeight = appData.deviceHeight;
-          params.platform = appData.platform;
-          params.deviceType = appData.deviceType;
+          const SessionStorage = nativeBridge.SessionStorage();
+          params.deviceWidth = SessionStorage.getItem("deviceWidth", "");
+          params.deviceHeight = SessionStorage.getItem("deviceHeight", "");
+          params.platform = SessionStorage.getItem("platform", "");
+          params.deviceType = SessionStorage.getItem("deviceType", "");
+          params.bundleIdentifier = SessionStorage.getItem("bundleIdentifier", "");
+          params.advertisingIdentifier = SessionStorage.getItem("advertisingIdentifier", "");
+          params.appName = SessionStorage.getItem("app_name", "");
+
           params.android_ad_tag = nativeBridge.getLocalStoreItem('android_ad_tag', 'dotstudiopro');
           params.ios_ad_tag = nativeBridge.getLocalStoreItem('ios_ad_tag', 'dotstudiopro');
 
@@ -46,7 +50,7 @@ export const handler = nativeBridge => params => {
       parsedPluginConfiguration = pluginConfigurations;
     }
   } else {
-    console.log("dev");
+    console.log("Development environment detecting, using fake data.");
     // development environment does not have pluginConfigurations, use hard coded API key
     return authenticate(
       nativeBridge,
@@ -64,8 +68,11 @@ export const handler = nativeBridge => params => {
         params.deviceHeight = "1080";
         params.platform = "android";
         params.deviceType = "phone";
-        params.android_ad_tag = "https://ads.superawesome.tv/v2/ad/44341?vast=true";
-        params.ios_ad_tag = "https://ads.superawesome.tv/v2/ad/44340?vast=true";
+        params.app_name = "Staging Environment";
+        params.bundleIdentifier = "1234567890";
+        params.advertisingIdentifier = "1234567890";
+        params.android_ad_tag = "https://vid.springserve.com/vast/604131?w={{deviceWidth}}&h={{deviceHeight}}&cb={{cb}}&dnt=&app_bundle={{app_bundle}}&app_name={{app_name}}&us_privacy=&coppa=1";
+        params.ios_ad_tag = "https://vid.springserve.com/vast/604130?w={{deviceWidth}}&h={{deviceHeight}}&cb={{cb}}&dnt=&app_bundle={{app_bundle}}&app_name={{app_name}}&us_privacy=&coppa=1";
 
         return commands[type](params)
           .then(nativeBridge.sendResponse)

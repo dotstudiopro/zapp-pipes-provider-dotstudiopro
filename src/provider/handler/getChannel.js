@@ -111,14 +111,19 @@ function parseVideo(video, params) {
 
   // calculate advertising array if video has ads
   if (video.ads) {
-    const { android_ad_tag, ios_ad_tag, platform } = params;
+    const { android_ad_tag, ios_ad_tag } = params;
+
+    // pull device data from Zapp Session Storage
+    const { deviceWidth, deviceHeight, platform, deviceType, bundleIdentifier, advertisingIdentifier, app_name } = params;
 
     const ad_tag = platform === "android" ? android_ad_tag : ios_ad_tag;
+
+    const tag_with_macros = ad_tag.replace('{{deviceWidth}}', deviceWidth).replace('{{deviceHeight}}', deviceHeight).replace('{{app_bundle}}', bundleIdentifier).replace('{{app_name}}', app_name).replace('{{device_devicetype}}', deviceType).replace('{{device_ifa}}', advertisingIdentifier).replace('{{cb}}', Math.round(new Date().getTime() / 1000));
 
     if (video.ads.pre && video.ads.pre === "yes") {
       video_ads.push({
         "offset": "preroll",
-        "ad_url": `${ad_tag}`
+        "ad_url": `${tag_with_macros}`
       })
     }
 
@@ -126,7 +131,7 @@ function parseVideo(video, params) {
       video.ads.mid_offset.offsets.linear.map((offset) => {
         video_ads.push({
           "offset": parseInt(offset).toString(),
-          "ad_url": `${ad_tag}`
+          "ad_url": `${tag_with_macros}`
         })
       });
     }
@@ -134,7 +139,7 @@ function parseVideo(video, params) {
     if (video.ads.post && video.ads.post === "yes") {
       video_ads.push({
         "offset": "postroll",
-        "ad_url": `${ad_tag}`
+        "ad_url": `${tag_with_macros}`
       })
     }
   }
