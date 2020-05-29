@@ -118,7 +118,9 @@ function parseVideo(video, params) {
 
     const ad_tag = platform === "android" ? android_ad_tag : ios_ad_tag;
 
-    const tag_with_macros = ad_tag.replace('{{deviceWidth}}', deviceWidth).replace('{{deviceHeight}}', deviceHeight).replace('{{app_bundle}}', bundleIdentifier).replace('{{app_name}}', app_name).replace('{{device_devicetype}}', deviceType).replace('{{device_ifa}}', advertisingIdentifier).replace('{{cb}}', Math.round(new Date().getTime() / 1000));
+    const app_name_encoded = encodeURI(app_name);
+
+    const tag_with_macros = ad_tag.replace('{{deviceWidth}}', deviceWidth).replace('{{deviceHeight}}', deviceHeight).replace('{{app_bundle}}', bundleIdentifier).replace('{{app_name}}', app_name_encoded).replace('{{device_devicetype}}', deviceType).replace('{{device_ifa}}', advertisingIdentifier).replace('{{cb}}', Math.round(new Date().getTime() / 1000));
 
     if (video.ads.pre && video.ads.pre === "yes") {
       video_ads.push({
