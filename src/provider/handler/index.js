@@ -27,14 +27,13 @@ export const handler = nativeBridge => params => {
             params.cdn = "https://" + params.cdn;
           }
 
-          const SessionStorage = nativeBridge.SessionStorage();
-          params.deviceWidth = SessionStorage.getItem("deviceWidth", "");
-          params.deviceHeight = SessionStorage.getItem("deviceHeight", "");
-          params.platform = SessionStorage.getItem("platform", "");
-          params.deviceType = SessionStorage.getItem("deviceType", "");
-          params.bundleIdentifier = SessionStorage.getItem("bundleIdentifier", "");
-          params.advertisingIdentifier = SessionStorage.getItem("advertisingIdentifier", "");
-          params.appName = SessionStorage.getItem("app_name", "");
+          params.deviceWidth = nativeBridge.getSessionStoreItem("deviceWidth", "");
+          params.deviceHeight = nativeBridge.getSessionStoreItem("deviceHeight", "");
+          params.platform = nativeBridge.getSessionStoreItem("platform", "");
+          params.deviceType = nativeBridge.getSessionStoreItem("deviceType", "");
+          params.bundleIdentifier = nativeBridge.getSessionStoreItem("bundleIdentifier", "");
+          params.advertisingIdentifier = nativeBridge.getSessionStoreItem("advertisingIdentifier", "");
+          params.appName = nativeBridge.getSessionStoreItem("app_name", "");
 
           params.android_ad_tag = nativeBridge.getLocalStoreItem('android_ad_tag', 'dotstudiopro');
           params.ios_ad_tag = nativeBridge.getLocalStoreItem('ios_ad_tag', 'dotstudiopro');
